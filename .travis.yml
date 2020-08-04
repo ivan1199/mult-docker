@@ -5,12 +5,12 @@ services:
 before install:
   - docker build -t ivan1199/react-test -f ./client/Dockerfile.dev ./client
 
-script: 
+script:
  - docker run ivan1199/react-test npm test -- --coverage
 
 after_success:
  - docker build -t ivan1199/multi-client ./client
- - docker build -t ivan1199/multi-ngix ./nginx 
+ - docker build -t ivan1199/multi-ngix ./nginx
  - docker build -t ivan1199/multi-server ./server
  - docker build -t ivan1199/multi-worker ./worker
 
@@ -18,6 +18,7 @@ after_success:
  -echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin
  # log in to the docker CLI
  - docker push ivan1199/multi-client
- - docker push ivan1199/multi-ngix 
+ - docker push ivan1199/multi-ngix
  - docker push ivan1199/multi-server
- - docker push ivan1199/multi-worker 
+ - docker push ivan1199/multi-worker
+
